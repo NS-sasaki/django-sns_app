@@ -158,3 +158,7 @@ MESSAGE_TAGS = {
 LOGIN_URL = '/accounts/login'
 LOGIN_REDIRECT_URL = '/accounts/home'
 LOGOUT_REDIRECT_URL = '/accounts/login'
+
+# Activate Django-Heroku.
+import django_heroku
+django_heroku.settings(locals())
