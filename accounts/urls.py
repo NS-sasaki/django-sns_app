@@ -8,7 +8,7 @@ from . import views # 追加
 
 app_name = 'accounts'
 urlpatterns = [
-    path('home/', HomeView.as_view(), name='home'),
+    #path('home/', HomeView.as_view(), name='home'),
     path('regist/', RegistUserView.as_view(), name='regist'),
     path('login/', UserLoginView.as_view(), name='login'),
     path('logout/', UserLogoutView.as_view(), name='logout'),  
