@@ -16,6 +16,16 @@ class UserManager(BaseUserManager):
         user.save(using=self._db) # データベースへユーザーを保存
         return user
 
+    def create_superuser(self, username, email, password):
+        user = self.create_user(
+            username,
+            email,
+            password=password,
+        )
+        user.is_admin = True
+        user.save(using=self._db)
+        return user
+
 
 class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=50, unique=True)
