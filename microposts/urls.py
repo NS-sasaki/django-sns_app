@@ -3,7 +3,8 @@ from .views import (
     PostCreateView, PostListView, 
     PostUpdateView, PostDeleteView,
     MyPostsView, 
-    FollowersView, FollowingView,# 追加
+    FollowersView, FollowingView,
+    GalleryView,# 追加
 )
 from . import views 
 
@@ -16,7 +17,8 @@ urlpatterns = [
     path('myposts/', MyPostsView.as_view(), name='myposts'),
     path('add_favourite/<int:pk>/', views.add_favourite, name='add_favourite'),
     path('rm_favourite/<int:pk>/', views.remove_favourite, name='rm_favourite'),
-    path('follower/', FollowersView.as_view(), name='follower'), # 追加
-    path('following/', FollowingView.as_view(), name='following'), # 追加
-    
+    path('follower/', FollowersView.as_view(), name='follower'), 
+    path('following/', FollowingView.as_view(), name='following'), 
+    path('gallery/', GalleryView.as_view(), name='gallery'), # 追加
+    path('add_file/', views.add_file, name='add_file'), # 追加    
 ]

@@ -1,13 +1,14 @@
-from django.shortcuts import render, redirect, get_object_or_404 
+from django.shortcuts import render, redirect, get_object_or_404
+from django.views.generic.base import TemplateView 
 from django.views.generic.edit import CreateView, UpdateView 
 from django.views.generic import ListView , DeleteView 
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Post
-from accounts.models import Relationship, User # 追加
+from .models import Post,Gallery# 追加
+from accounts.models import Relationship, User 
 from .forms import PostCreateForm, PostUpdateForm
 from django.contrib import messages
 from django.urls import reverse_lazy
-
+from django.http import HttpResponse,JsonResponse # 追加
 
 # Create your views here.
 class PostCreateView(LoginRequiredMixin, CreateView):
@@ -174,3 +175,25 @@ class FollowingView(LoginRequiredMixin, ListView): # 追加
         # 自分をフォローしている人の数を取得
         context['follower_count'] = User.objects.filter(id__in=followers).count()
         return context
+
+# file(=画像)をアップロードする関数
+def add_file(request):
+    if request.method == "POST":        
+        # ログインユーザーを取得
+        user = request.user
+        # 画像をテンプレートからfileとして取得
+        pict = request.FILES.get('file')
+        # Galleryモデルにオーナーと画像を保存
+        Gallery.objects.create(owner = user, image=pict)
+        return HttpResponse('')
+    return HttpResponse('post error')
+
+class GalleryView(LoginRequiredMixin,ListView):
+    template_name = 'microposts/gallery.html'
+    # 利用するモデルを指定
+    model = Gallery    
+    
+    # Galleryテーブルのowner_idが自分自身の全データを取得するqs
+    def get_queryset(self):  
+        qs = Gallery.objects.filter(owner_id=self.request.user)
+        return qs

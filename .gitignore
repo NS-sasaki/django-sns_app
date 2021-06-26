@@ -1,0 +1,6 @@
+*.log
+*.pyc
+db.sqlite3
+__pycache__
+*/gallery/
+*/images/

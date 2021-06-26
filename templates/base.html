@@ -8,7 +8,8 @@
     {# bootstrapのCSS、自作のCSSを読み込む#}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'accounts/style.css' %}">
+    <link rel="stylesheet" href="{% static 'CSS/style.css' %}">
+    <link rel="stylesheet" href="{% static 'CSS/magnific-popup.css' %}">　{# 追加 Magnific-popup #}
     {% load bootstrap4 %}
 </head>
 <body>
@@ -38,6 +39,8 @@
                         <a class="dropdown-item" href="{% url 'microposts:myposts' %}">My posts</a>
                         <a class="dropdown-item" href="{% url 'microposts:following' %}">Following</a>
                         <a class="dropdown-item" href="{% url 'microposts:follower' %}">Follower</a>
+                        {# gallery.htmlへのリンク #}
+                        <a class="dropdown-item" href="{% url 'microposts:gallery' %}">Gallery</a>
                     </div>
                 </li>
             {% endif %}
@@ -73,7 +76,11 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"></script>
-{% block footer %}
-{% endblock footer %}
+{#dropzone js&css#}
+<script src="https://rawgit.com/enyo/dropzone/master/dist/dropzone.js"></script>
+<link rel="stylesheet" href="https://rawgit.com/enyo/dropzone/master/dist/dropzone.css">
+<script src="{% static 'JS/jquery.magnific-popup.min.js' %}"></script>
+{#自作JS#}
+<script src="{% static 'JS/main.js' %}" defer></script>
 </body>
 </html>

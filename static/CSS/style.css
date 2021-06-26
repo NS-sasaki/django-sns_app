@@ -1,0 +1,39 @@
+#avatar-thumbnail {
+    height: 70px;
+    width: 70px;
+    object-fit: cover;
+    border-radius: 20%;
+    border: 1px solid #eee;
+}
+
+#avatar-image {
+    height: 250px;
+    width: 250px;
+    object-fit: cover;
+    border-radius: 20%;
+    border: 1px solid #eee;
+}
+
+#post-thumbnail {
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+    border-radius: 20%;
+    border: 1px solid #eee;
+}
+
+#post-image {
+    height: 250px;
+    width: 250px;
+    object-fit: cover;
+    border-radius: 20%;
+    border: 1px solid #eee;
+}
+
+#gallery-thumbnail {
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+    border-radius: 20%;
+    border: 1px solid #eee;
+}

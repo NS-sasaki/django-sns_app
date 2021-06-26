@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="center jumbotron">
+        <div class="text-center">            
+            <h2>Your Gallery</h2>
+        </div>
+        {# Galleryモデルの画像を表示する部分#}
+        <div>
+            {% for item in object_list %}
+            {# magnific-popupを適用 #}
+                <a class="popup" href="{{ item.image.url }}">
+                <img class="rounded img-fluid mx-auto d-inline"
+                    src="{{ item.image.url }}" id="gallery-thumbnail" alt="gallery-thumbnail">   
+                </a>
+            {% endfor %}
+        </div>
+        {# Galleryモデルの画像を表示する部分　ここまで #}
+    </div>
+    {# Dropzone.jsを用いたドラッグ＆ドロップ領域の設定 #}
+    <form action="{% url 'microposts:add_file' %}" method="post" class="dropzone dz" id="my-dropzone">
+            {% csrf_token %}
+            <div class="fallback">
+                <input name="file" type="file" multiple/>
+            </div>
+    </form>
+    {# Dropzone.jsを用いたドラッグ＆ドロップ領域の設定 ここまで#}
+{% endblock %}

@@ -7,7 +7,7 @@
                     {#  views.pyからmessagesが渡された場合にのみメッセージを表示させる。#}
                     {% if messages %}
                         {% for message in messages %}
-                            {#   message/tagsはSettings.pyで設定している#}
+                            {#  message/tagsはSettings.pyで設定している#}
                             <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
                                 {{ message }}
                             </li>
@@ -17,8 +17,8 @@
                         <div class="card-header">
                             <h4><b>新規投稿</b></h4>
                         </div>
-                        <div class="card-body">
-                            <form method="post">
+                        <div class="card-body">　{# 画像ファイルをアップロードするためenctype="multipart/form-data"を指定#}
+                            <form method="post" action="{% url 'microposts:create' %}" enctype="multipart/form-data">
                                 {% csrf_token %}
                                 {% bootstrap_form form %}
                                 <button type="submit" class="btn btn-outline-primary btn-block">
