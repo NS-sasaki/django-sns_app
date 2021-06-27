@@ -16,7 +16,7 @@ SECRET_KEY = 'django-insecure-x5f@-1)=#ji@f35lq2zh%up@tku@ry8r!4%zh&9+fwce6ayduy
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']#追加
+ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com', 'nssasaki.pythonanywhere.com']#追加
 
 
 # Application definition
@@ -169,8 +169,8 @@ LOGIN_REDIRECT_URL = '/accounts/edit_profile'
 LOGOUT_REDIRECT_URL = '/accounts/login'
 
 # Activate Django-Heroku.
-import django_heroku
-django_heroku.settings(locals())
+#import django_heroku
+#django_heroku.settings(locals())
 
 
 #追加
