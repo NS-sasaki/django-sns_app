@@ -6,6 +6,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic import ListView 
 from django.contrib.auth.mixins import LoginRequiredMixin 
 from .models import User, Relationship # 追加
+from django.contrib.auth import login, authenticate    #　追加
 
 class HomeView(TemplateView):
     template_name = 'accounts/home.html'
@@ -13,6 +14,17 @@ class HomeView(TemplateView):
 class RegistUserView(CreateView):
     template_name = 'accounts/regist.html'
     form_class = RegistForm
+    success_url = '/accounts/login/' #修正
+    
+    # formが有効だった時にログインさせる処理
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        username = form.cleaned_data.get('username') # emailログインの場合は変更必要
+        password = form.cleaned_data.get('password')
+        user = authenticate(username=username, password=password)
+        login(self.request, user)
+        return response
+
 
 class UserLoginView(LoginView):  
     template_name = 'accounts/login.html'

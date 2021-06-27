@@ -2,6 +2,7 @@ from pathlib import Path
 import os #追加
 from django.contrib.messages import constants as messages #追加
 from django.contrib.messages import constants as message_constants #追加
+import environ
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -15,7 +16,7 @@ SECRET_KEY = 'django-insecure-x5f@-1)=#ji@f35lq2zh%up@tku@ry8r!4%zh&9+fwce6ayduy
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']#追加
 
 
 # Application definition
@@ -27,9 +28,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'accounts',  #追加
-    'microposts', #追加
-    'bootstrap4', #追加
+    'accounts',  
+    'microposts', 
+    'bootstrap4', 
+    'storages',#追加
+    
 ]
 
 # Bootstrap4 jqueryを使用するため追加
@@ -48,7 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware', # 追加
 ]
 
 ROOT_URLCONF = 'sns.urls'
@@ -168,3 +171,16 @@ LOGOUT_REDIRECT_URL = '/accounts/login'
 # Activate Django-Heroku.
 import django_heroku
 django_heroku.settings(locals())
+
+
+#追加
+AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
+AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
+AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+S3_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
+MEDIA_URL = S3_URL
+
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
